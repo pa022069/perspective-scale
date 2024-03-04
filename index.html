@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        border: 1px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .box-1 {
+        perspective: 100px;
+        perspective-origin: center center;
+        pointer-events: none;
+      }
+      .box-1-content {
+        transform-style: preserve-3d;
+        border: 1px solid #000;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s;
+
+        /* 最大100px，對應perspective */
+        transform: translateZ(50px); /* DEFAULT */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="box box-1">
+        <div id="target" class="box-1-content">100</div>
+      </div>
+    </div>
+    <input id="ranger" type="range" min="0" max="99" />
+    <script>
+      const ranger = document.getElementById('ranger');
+      const item = document.getElementById('target');
+      ranger.addEventListener('change', function (e) {
+        const value = e.target.value;
+        /* 最大100px，對應perspective */
+        item.style.transform = `translateZ(${value}px)`;
+      });
+    </script>
+  </body>
+</html>
